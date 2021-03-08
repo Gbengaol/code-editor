@@ -1,0 +1,19 @@
+.editorWrapper {
+  position: relative;
+  height: 100%;
+
+  .buttonFormat {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    z-index: 20;
+    opacity: 0;
+    transition: opacity 0.5s;
+  }
+
+  &:hover {
+    .buttonFormat {
+      opacity: 1;
+    }
+  }
+}
