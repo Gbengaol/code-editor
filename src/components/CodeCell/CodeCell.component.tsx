@@ -7,12 +7,15 @@ import styles from "./CodeCell.module.scss";
 
 function CodeCell() {
   const [input, setInput] = useState("");
+  const [error, setError] = useState("");
   const [code, setCode] = useState("");
 
   useEffect(() => {
+    setError("");
     const timer = setTimeout(async () => {
       const output = await bundler(input);
-      setCode(output);
+      setCode(output.code);
+      setError(output.err);
     }, 1000);
 
     return () => {
@@ -30,7 +33,7 @@ function CodeCell() {
             onChange={(value) => setInput(value)}
           />
         </Resizable>
-        <Preview code={code} />
+        <Preview code={code} errorMessage={error} />
       </div>
     </Resizable>
   );
