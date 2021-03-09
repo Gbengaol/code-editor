@@ -4,14 +4,14 @@ import MonacoEditor, { OnMount, OnChange } from "@monaco-editor/react";
 import prettier from "prettier";
 import parser from "prettier/parser-babel";
 import codeShift from "jscodeshift";
-import "./syntax.css";
+import "./syntax.scss";
 
 //@ts-ignore
 import Highlighter from "monaco-jsx-highlighter";
 
 interface CodeEditorProps {
   initialValue: string;
-  onChange(value: string | undefined): void;
+  onChange(value: any): void;
 }
 
 const CodeEditor: React.FC<CodeEditorProps> = ({ initialValue, onChange }) => {
@@ -57,7 +57,7 @@ const CodeEditor: React.FC<CodeEditorProps> = ({ initialValue, onChange }) => {
         Apply Prettier
       </button>
       <MonacoEditor
-        height="500px"
+        height="100%"
         language="javascript"
         theme="vs-dark"
         value={initialValue}
