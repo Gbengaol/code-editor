@@ -1,3 +1,2 @@
-export default () => {
-  console.log("object");
-};
+export * from "./store";
+export * from "./reducers";
