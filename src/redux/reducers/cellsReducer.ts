@@ -20,7 +20,7 @@ const initialState: CellsState = {
 };
 
 const cellsReducer = produce(
-  (state: CellsState = initialState, action: Action): CellsState | void => {
+  (state: CellsState = initialState, action: Action): CellsState => {
     switch (action.type) {
       case actionType.MOVE_CELL:
         const { direction } = action.payload;
@@ -28,7 +28,7 @@ const cellsReducer = produce(
         const targetIndex = direction === "up" ? index - 1 : index + 1;
 
         if (targetIndex < 0 || targetIndex > state.order.length - 1) {
-          return;
+          return state;
         }
 
         state.order[index] = state.order[targetIndex];
@@ -44,8 +44,6 @@ const cellsReducer = produce(
         state.data[id].content = content;
         return state;
       case actionType.INSERT_CELL_AFTER:
-        return { ...state };
-      case actionType.INSERT_CELL_BEFORE:
         const cell: Cell = {
           content: "",
           type: action.payload.type,
@@ -57,13 +55,13 @@ const cellsReducer = produce(
         );
 
         if (foundIndex < 0) {
-          state.order.push(cell.id);
+          state.order.unshift(cell.id);
         } else {
+          state.order.splice(foundIndex + 1, 0, cell.id);
         }
-        state.order.splice(foundIndex, 0, cell.id);
         return state;
       default:
-        return { ...state };
+        return state;
     }
   }
 );

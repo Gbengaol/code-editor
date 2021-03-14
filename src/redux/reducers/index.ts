@@ -2,7 +2,7 @@ import cellsReducer from "./cellsReducer";
 import { combineReducers } from "redux";
 
 const reducers = combineReducers({
-  cell: cellsReducer,
+  cells: cellsReducer,
 });
 
 export default reducers;
