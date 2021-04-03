@@ -2,6 +2,8 @@ import path from "path";
 import { Command } from "commander";
 import { serve } from "local-api";
 
+const isProduction = process.env.NODE_ENV === "production";
+
 // [] means compulsory value
 // <> means optional value
 export const serveCommand = new Command()
@@ -14,7 +16,7 @@ export const serveCommand = new Command()
       const dir = path.join(process.cwd(), path.dirname(filename));
       // Gets exact filename of the entered filename
       const fileName = path.basename(filename);
-      await serve(Number(options.port), fileName, dir);
+      await serve(Number(options.port), fileName, dir, !isProduction);
       console.log(
         `Opened ${filename}. Navigate to http://localhost:${options.port}`
       );

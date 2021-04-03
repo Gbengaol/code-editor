@@ -43,6 +43,7 @@ exports.serveCommand = void 0;
 var path_1 = __importDefault(require("path"));
 var commander_1 = require("commander");
 var local_api_1 = require("local-api");
+var isProduction = process.env.NODE_ENV === "production";
 // [] means compulsory value
 // <> means optional value
 exports.serveCommand = new commander_1.Command()
@@ -59,7 +60,7 @@ exports.serveCommand = new commander_1.Command()
                     _a.trys.push([0, 2, , 3]);
                     dir = path_1.default.join(process.cwd(), path_1.default.dirname(filename));
                     fileName = path_1.default.basename(filename);
-                    return [4 /*yield*/, local_api_1.serve(Number(options.port), fileName, dir)];
+                    return [4 /*yield*/, local_api_1.serve(Number(options.port), fileName, dir, !isProduction)];
                 case 1:
                     _a.sent();
                     console.log("Opened " + filename + ". Navigate to http://localhost:" + options.port);
