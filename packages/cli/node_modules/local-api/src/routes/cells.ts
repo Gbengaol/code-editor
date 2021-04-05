@@ -30,14 +30,18 @@ export const createCellsRouter = (filename: string, dir: string) => {
   });
 
   router.post("/cells", async (req, res) => {
-    // Take the list of cells from req obj
-    // Serialize them
-    const { cells }: { cells: Cell[] } = req.body;
+    try {
+      // Take the list of cells from req obj
+      // Serialize them
+      const { cells }: { cells: Cell[] } = req.body;
 
-    // Write cells into file
-    await fs.writeFile(fullPath, JSON.stringify(cells), "utf-8");
+      // Write cells into file
+      await fs.writeFile(fullPath, JSON.stringify(cells), "utf-8");
 
-    res.send({ status: "ok" });
+      res.send({ status: "ok" });
+    } catch (error) {
+      throw error;
+    }
   });
 
   return router;
